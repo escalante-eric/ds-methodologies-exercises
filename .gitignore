@@ -1,0 +1,4 @@
+.ipynb_checkpoints/
+__pycache__/
+Excel_Stats.xlsx
+env.py
