@@ -59,6 +59,7 @@ df_titanic.drop(columns='deck', inplace=True)
 df_titanic.embarked.value_counts(dropna=False)
 df_titanic.embarked.fillna('O', inplace=True)
 
+encoder = LabelEncoder()
 encoder.fit(df_titanic.embarked)
 df_titanic.embarked = encoder.transform(df_titanic.embarked)
 
