@@ -64,9 +64,10 @@ encoder.fit(df_titanic.embarked)
 df_titanic.embarked = encoder.transform(df_titanic.embarked)
 
 # Scale the age and fare columns using a min max scaler. Why might this be beneficial? When might you not want to do this?
+'''
 from sklearn.model_selection import train_test_split
 
-train, test = train_test_split(df_titanic)
+train, test = train_test_split(df_titanic, test_size=.30, random_state=123)
 
 from sklearn.preprocessing import MinMaxScaler
 
@@ -75,26 +76,29 @@ scaler.fit(train[['fare', 'age']])
 
 train[['fare', 'age']] = scaler.transform(train[['fare', 'age']])
 test[['fare', 'age']] = scaler.transform(test[['fare', 'age']])
+'''
 
 # Create a function named prep_titanic that accepts the untransformed titanic data, and returns the data with the transformations above applied.
 def handle_missing_values(df):
     return df.assign(
         embark_town=df.embark_town.fillna('Other'),
-        embarked=df.embarked.fillna('O')
+        embarked=df.embarked.fillna('O'),
     )
 
-def drop_columns(df):
-    return df.drop(columns='deck')
+def remove_columns(df):
+    return df.drop(columns=['deck'])
 
 def encode_embarked(df):
     encoder = LabelEncoder()
     encoder.fit(df.embarked)
-    return df.assign(embarked=encoder.transform(df.embarked))
+    return df.assign(embarked_encode = encoder.transform(df.embarked))
 
 def prep_titanic_data(df):
-    return df.pipe(handle_missing_values)\
-        .pipe(drop_columns)\
+    df = df\
+        .pipe(handle_missing_values)\
+        .pipe(remove_columns)\
         .pipe(encode_embarked)
+    return df
 
 #Save your prep_titanic and prep_iris functions in a file named prepare.py so that we can use them later on.
 
