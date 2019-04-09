@@ -30,5 +30,9 @@ def zillow_properties_2017():
                         LEFT JOIN typeconstructiontype USING (typeconstructiontypeid)', 
     get_connection('zillow'))
 
-df_2016 = zillow_properties_2016()
+def get_zillow_csv():
+    df_2016 = zillow_properties_2016()
+    df_2017 = zillow_properties_2017()
+    zillow = df_2016.append(df_2017, ignore_index=True)
+    return zillow.to_csv(r'../Clustering/zillow_properties.csv', index=False)
 
