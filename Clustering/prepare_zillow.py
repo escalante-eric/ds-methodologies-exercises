@@ -17,7 +17,7 @@ def handle_missing_values(df, prop_required_column = .5, prop_required_row = .75
     return df
 
 def only_one_unit():
-    unit_one = df[(df['unitcnt'] == 1) & (df['bedroomcnt'] >= 1)].index
+    unit_one = df[(df['unitcnt'] == 1) & (df['bedroomcnt'] >= 1)].index    
     return df.drop(unit_one, inplace=True)
 
 def remove_proerty_land():
@@ -30,11 +30,13 @@ def data_prep(df, cols_to_remove=[], prop_required_column=.5, prop_required_row=
     df = remove_columns(df, cols_to_remove)
     df = handle_missing_values(df, prop_required_column, prop_required_row)
     df = df.dropna(axis=0, subset=['longitude'])
-    remove_proerty_land()
-    only_one_unit()
     return df
 
 data_prep(df, cols_to_remove=['airconditioningtypeid', 'architecturalstyletypeid', 'buildingclasstypeid','buildingqualitytypeid', 'propertylandusetypeid', 'typeconstructiontypeid', 'storytypeid', 'heatingorsystemtypeid'])
+
+print(df.propertylandusedesc.value_counts())
+
+print(df.shape)
 
 '''
 ### use this later in exploration.py
