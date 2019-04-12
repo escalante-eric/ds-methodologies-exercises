@@ -34,10 +34,6 @@ def data_prep(df, cols_to_remove=[], prop_required_column=.5, prop_required_row=
 
 data_prep(df, cols_to_remove=['airconditioningtypeid', 'architecturalstyletypeid', 'buildingclasstypeid','buildingqualitytypeid', 'propertylandusetypeid', 'typeconstructiontypeid', 'storytypeid', 'heatingorsystemtypeid'])
 
-print(df.propertylandusedesc.value_counts())
-
-print(df.shape)
-
 '''
 ### use this later in exploration.py
 bycounty = df.groupby('regionidcounty')
