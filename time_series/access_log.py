@@ -6,6 +6,7 @@ df = pd.read_csv('http://python.zach.lol/access.log',
               usecols=[0, 3, 4, 5, 6, 7, 8],
               names=['ip', 'time', 'request', 'status', 'size', 'referer', 'request_agent'],
               na_values='-',
-              header=None)
+              header=None,
+              index_col=False)
 
-print(df.sample(30))
+print(df.tail())
