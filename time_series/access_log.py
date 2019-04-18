@@ -21,4 +21,4 @@ df = df.set_index('timestamp')
 ### Remove minor details in feature 'request_method'
 df.request_method = df.request_method.str.replace('"', '')
 
-print(df.resample('60min').mean())
+print(df.tail())
