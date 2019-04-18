@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 
+### Bring in access log as csv:
 df = pd.read_csv('http://python.zach.lol/access.log',          
               engine='python',
               header=None,
@@ -10,13 +11,14 @@ df = pd.read_csv('http://python.zach.lol/access.log',
               na_values='-',
               usecols=[0, 3, 4, 5, 6, 8])
 
+### Alter feature 'timestamp' multiple times:
 df.timestamp = df.timestamp.str.replace('[', '')
 df.timestamp = df.timestamp.str.replace(']', '')
 df.timestamp= pd.to_datetime(df.timestamp.str.replace(':', ' ', 1)) 
+df = df.tz_localize('utc').tz_convert('America/Chicago')
+df = df.set_index('timestamp')
 
+### Remove minor details in feature 'request_method'
 df.request_method = df.request_method.str.replace('"', '')
 
-df = df.set_index('timestamp')
-df = df.tz_localize('utc').tz_convert('America/Chicago')
-
-print(df.head())
+print(df.resample('60min').mean())
