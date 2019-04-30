@@ -49,7 +49,7 @@ def create_columns(df):
 
     return df
 
-def prep_store_data():
+def prep_store_data(df):
     '''
     Takes the aquired dataframe and preforms the above functions to create a dataframe we will 
     work with in the next step
@@ -57,6 +57,7 @@ def prep_store_data():
         1. prep_sale_data
         2. date_breakdown
         3. create_columns
+        4. set the 'sale_date' column as the index
     '''
     df = prep_sale_data(df)
     df = date_breakdown(df)
