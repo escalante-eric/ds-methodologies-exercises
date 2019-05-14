@@ -10,6 +10,7 @@ import unicodedata
 import re
 import json
 import spacy
+from spacy.lang.en import English
 import nltk
 from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
@@ -47,7 +48,6 @@ def remove_stopwords(text):
 def prep_text(text):
     return {
         'original': text,
-        'stemmed': stem(basic_clean(text)),
         'lemmatized': lemmatize(basic_clean(text)),
         'clean': remove_stopwords(basic_clean(text))
     }

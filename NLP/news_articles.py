@@ -23,7 +23,7 @@ def handle_article(article: BeautifulSoup) -> Dict[str, str]:
     Given a single article, extracts the title and content
     '''
     return {
-        'title': article.find(class_='news-card-title').find('a').text.strip(),
+        'title': article.find(class_='repo-list').find('a').text.strip(),
         'content': (article.find(class_='news-card-content')
                     .find('div', attrs={'itemprop': 'articleBody'})
                     .text.strip())
